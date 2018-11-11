@@ -56,7 +56,7 @@ def print_best_passing_off():
 
 def get_rushing_yds(seas, week, team):
     '''
-    This will return a teams receiving yards for a specific season and week.
+    This will return a teams rushing yards for a specific season and week.
     '''
     games = nflgame.games_gen(seas, week, team, team)
     if games == None:
@@ -73,7 +73,7 @@ def get_rushing_yds(seas, week, team):
 
 def get_rush_yds_per_team(season=None, weeks=None):
     '''
-    This returns all teams receiving yards for a season and week(s)
+    This returns all teams rushing yards for a season and week(s)
     '''
     if season == None and weeks == None:
         season, current_week = nflgame.live.current_year_and_week()
@@ -87,17 +87,17 @@ def get_rush_yds_per_team(season=None, weeks=None):
         result = get_rushing_yds(season, weeks, team_abbrev)               
         
         if (result[1] > 0): 
-            # Only teams with receiving yards
+            # Only teams with rushing yards
             if isDebug:
                 print "%s had %s rushing yds" % (result[0], result[1])
             team_rec_yds.append(result)
     
-    # Return list of teams and receiving yds
+    # Return list of teams and rushing yds
     return team_rec_yds
 
 def print_best_rushing_off():
     '''
-    Prints the 'best' passing offense by teams receiving yards.
+    Prints the 'best' rushing offense by teams rushing yards.
     '''
     results = get_rush_yds_per_team()
     results.sort(key = lambda x: (x[1]), reverse=True)
@@ -158,7 +158,7 @@ def print_worst_passing_def():
 
 def get_rushing_yds_against(seas, week, team):
     '''
-    Returns a tuple containing a team and receiving yards against said team for season and week(s)
+    Returns a tuple containing a team and rushing yards against said team for season and week(s)
     '''
     games = nflgame.games_gen(seas, week, team, team)
     if games == None:
@@ -173,7 +173,7 @@ def get_rushing_yds_against(seas, week, team):
 
 def get_rush_yds_against_per_team(season=None, weeks=None):
     '''
-    Returns a list of all teams and receiving yards scored against them (with at least 1 yard)
+    Returns a list of all teams and rushing yards scored against them (with at least 1 yard)
     '''
     if season == None and weeks == None:
         season, current_week = nflgame.live.current_year_and_week()
@@ -196,7 +196,7 @@ def get_rush_yds_against_per_team(season=None, weeks=None):
 
 def print_worst_rushing_def():
     '''
-    Prints the team with most receiving yards scored against them.
+    Prints the team with most rushing yards scored against them.
     '''
     results = get_rush_yds_against_per_team()
     results.sort(key = lambda x: (x[1]),reverse=True)
